@@ -38,10 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp.apps.MainappConfig',
-<<<<<<< HEAD
-    'user.apps.UserConfig',
-=======
->>>>>>> parent of 70a454d... write_rm&user_mod
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -123,28 +120,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,  'static')
-]#파일의 경로
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'mainproject','static')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-MEDIA_URL = '/media/'
-
-# 로그인이 되어있지 않은 경우 로그인 페이지로 리다이렉트하는 url
-LOGIN_URL = '/user/login/'
-
-# 로그인 시 리다이렉트할 url
-LOGIN_REDIRECT_URL = "/"
-
-# 로그아웃 후 리다이렉트할 url
-LOGOUT_REDIRECT_URL = "/"
-
-# 세션 유효기간 설정 (초단위)
-SESSION_COOKIE_AGE = 60 * 60
-=======
->>>>>>> parent of 70a454d... write_rm&user_mod
