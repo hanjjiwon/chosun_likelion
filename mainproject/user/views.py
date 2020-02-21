@@ -23,5 +23,5 @@ class UserLogin(LoginView):
 
     # 유효성 검증에 실패한 경우 form_invalid 메소드를 오버라이딩해서 에러 메시지를 출력
     def form_invalid(self, form):
-        messages.error(self.request, '다시다시', extra_tags='danger')
+        messages.error(self.request, 'ㅅㅂ', extra_tags='danger')
         return super().form_invalid(form)
