@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+
+=======
 """mainproject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,13 +16,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+>>>>>>> parent of 70a454d... write_rm&user_mod
 from django.contrib import admin
 from django.urls import path
 import mainapp.views
+<<<<<<< HEAD
+import user.views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',mainapp.views.home,name="home"),
+    path('user/', include('user.urls')),
+=======
 import write.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',mainapp.views.home, name="home"),
 
+>>>>>>> parent of 70a454d... write_rm&user_mod
 ]
