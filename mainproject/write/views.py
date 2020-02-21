@@ -14,8 +14,8 @@ def write(request):
     return render(request, 'write.html')
 
 
-class SubjectList(ListView):
-    model = Photo
+class CommenttList(ListView):
+    model = Subject_code, Subject
     template_name_suffix = '_list'
 
 class CommentCreate(CreateView):
@@ -34,7 +34,7 @@ class CommentCreate(CreateView):
 
 
 class CommentUpdate(UpdateView):
-    model = Photo
+    model = Subject_code, Subject, Write_index
     fields = ['subject_name', 'professor', 'homework','team','grade','attendance','test',]
     template_name_suffix = '_update'
     success_url = '/'
@@ -49,7 +49,7 @@ class CommentUpdate(UpdateView):
 
 
 class CommentDelete(DeleteView):
-    model = Photo
+    model = Subject_code, Subject, Write_index
     template_name_suffix = '_delete'
     success_url = '/'
 
@@ -63,12 +63,12 @@ class CommentDelete(DeleteView):
 
 
 class CommentDetail(DetailView):
-    model = Photo
+    model = Subject_code, Subject, Write_index
     template_name_suffix = '_detail'
 
 
 class CommentMyList(ListView):
-    model = Photo
+    model = Subject_code, Subject, Write_index
     template_name = 'photo/photo_mylist.html'
 
     def dispatch(self, request, *args, **kwargs):
