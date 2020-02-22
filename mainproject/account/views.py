@@ -1,37 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from .forms import SignUpForm
-# # Create your views here.
+from django.contrib import auth
+from django.contrib.auth import login, authenticate
+
+from django.http import HttpResponse
 
 
 def signup(request):
     if request.method == 'POST':
-        signup_form = SignUpForm(request.POST)
+        if request.POST['password1'] == request.POST['password2']:
+            user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
+            auth.login(request, user)
+            return redirect('home')
+    return render(request, 'signup.html')
 
-        if signup_form.is_valid():
-            user_instance = signup_form.save(commit=False)
-            user_instance.set_password(signup_form.cleaned_data['password'])
-            user_instance.save()
-            return render(request, 'signup_complete.html', {'username': user_instance.username})
-
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return redirect('home')
+        else:
+            # return HttpResponse('로그인 실패. 다시 시도 해보세요.')
+            return render(request, 'login.html', {'error': 'username or password is incorrect.'})
     else:
-        signup_form = SignUpForm()
+        return render(request, 'login.html')
 
-    return render(request, 'signup.html', {'form': signup_form.as_p})
-
-
-# def signup(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         password2 = request.POST.get('password2')
-#         user = User()
-#         user.username = username
-#         user.set_password(password)
-#         user.save()
-
-#         return render(request, 'accounts/signup_complete.html')
-
-#     else:
-#         context_values = {'form': 'this is form'}
-#         return render(request, 'accounts/signup.html', context_values)
+def logout(request) : 
+        if request.method == 'POST' :
+            auth.logout(request)
+            redirect('/')
+        return redirect('/')    
