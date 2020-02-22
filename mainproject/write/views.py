@@ -30,12 +30,13 @@ from hitcount.views import HitCountDetailView
 #main page = index.html을 보여줄것임
 class BoardList(ListView) : 
     model = Subject_code, Subject
-    template_name = 'board/base.html'
+    template_name = 'board/index.html'
 
 
 #강의상세page = detail.html
 class BoardDetail(ListView) :
     model = Subject_code, Subject
+    template_name = 'write/detail + <int:pk>.html'
 
 
 #cnt증가
