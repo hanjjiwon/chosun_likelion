@@ -101,7 +101,3 @@ class BoardDelete(DeleteView) :
 #cnt증가
 class PostCountHitDetailView(BoardDetail, HitCountDetailView):
     count_hit = True
-
-
-
-

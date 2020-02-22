@@ -106,7 +106,6 @@ class Evaluation(models.Model):
     subject_id = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     def __str__(self):
-
         return str(self.id) + ' ' + self.writer_id
 
 

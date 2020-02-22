@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mainapp.apps.MainappConfig',
     'write.apps.WriteConfig',
     'hitcount',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
