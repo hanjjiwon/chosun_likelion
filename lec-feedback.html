@@ -51,7 +51,7 @@
                 <!-- 댓글 쓴 사람만 삭제 가능하게 -->
                 {% for comment in Lec.objects.all()%}
                     {% if comment.user == request.user%}
-                    <div class="feedback-context hidden"><a href="{% url 'delete_memo' memokey=memo.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')"><p style="text-align: right;">삭제</p></a></div>
+                    <div class="feedback-context"><a href="{% url 'feedback_delete' memokey=memo.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')"><p style="text-align: right;">삭제</p></a></div>
                     {%endif%}
                 {%endfor%}
                 <div class="feedback-context">{{lec.pub_date}}</div>
