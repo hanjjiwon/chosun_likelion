@@ -31,7 +31,8 @@ endblock
 
 <title>base</title>
 <link rel="stylesheet" href="{% static 'css/base.css' %}">
-<!-- <link rel="stylesheet" href="../../static/css/write.css"> -->
+<link rel="stylesheet" href="{% static 'css/lec-feedback.css'%}">
+<link rel="stylesheet" href="{% static 'css/write.css'%}">
 </head>
 
 <body>
@@ -44,6 +45,11 @@ endblock
 <div class = "menu">
 <img src="{% static 'img/back.jpg' %}" width="40px">
 </div>
+{% block lists %}
+<!-- 이 사이에 각 페이지들의 컨텐츠들이 담길것이다.-->
+{% endblock %}
+
+
 <!-- 이 아래에 컨텐츠가 올 예정이라고 미리 선언 -->
 {% block contents %}
 <!-- 이 사이에 각 페이지들의 컨텐츠들이 담길것이다.-->
