@@ -76,7 +76,7 @@ class BoardCreate(CreateView):
         if form.is_valid() :
             #올바르다면
             form.instance.save()
-            return redirect('/photo')
+            return redirect('/write/detail/' + str(id))
         else : 
             #올바르지 않다면
             return self.render_to_response({'form' : form})
