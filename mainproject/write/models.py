@@ -8,11 +8,7 @@ from imagekit.processors import ResizeToFill
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCount, HitCountMixin
 
-
-# Create your models here.
-
-
-# 계정 테이블
+# 계정 테이블 - 사용안함
 class Account(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     password = models.CharField(max_length=30)
@@ -29,7 +25,7 @@ class Subject_range(models.Model):
     def __str__(self):
         return self.subject_range
 
-# 과목 정보 테이블
+# 과목 정보 테이블 - 사용안함
 class Subject_code(models.Model):
     # 과목 코드(PK)
     subject_code = models.CharField(max_length=20, primary_key=True)
@@ -47,8 +43,12 @@ class Subject(models.Model):
 
     # 영역 (FK) - 과목 영역 테이블에서 가져옴
     subject_range = models.ForeignKey(Subject_range, on_delete = models.CASCADE)
-    # 과목 코드 (FK) - 과목 정보 테이블에서 가져옴
-    subject_code = models.ForeignKey(Subject_code, on_delete=models.CASCADE)
+    
+    # # 과목 코드 (FK) - 과목 정보 테이블에서 가져옴
+    # subject_code = models.ForeignKey(Subject_code, on_delete=models.CASCADE)
+
+    # 과목명
+    subject_name = models.CharField(max_length=50, null=True)
 
     # 강사명
     professor = models.CharField(max_length=50)
@@ -88,7 +88,7 @@ class Subject(models.Model):
     test_best = models.CharField(max_length=20, null=True)
 
     def __str__(self):
-        return str(self.id) + ' ' + str(self.subject_range) + ' ' + str(self.subject_code) + ' ' + str(self.professor)
+        return str(self.id) + ' ' + str(self.subject_range) + ' ' + str(self.subject_name) + ' ' + str(self.professor)
 
 # 강의 평가 테이블
 class Evaluation(models.Model):
