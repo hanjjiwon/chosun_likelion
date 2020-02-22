@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+{%block first%}  
+    <!--각자 페이지 마다 콘텐츠 들어갈 부분-->
+  <div class="content">
+    <h2>검색한 과목 이름나오게</h2>
+    <br>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">과목명</th>
+            <th scope="col">교수명</th>
+            <th scope="col">추천수</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for subjetname in subjectcode.all %}
+            <tr>
+              <td><a href="./search.html" style="color:black">과목이름이 뭔데</a></td>
+              <td>교수이름이 뭔데</td>
+              <td>@mdo</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <br>
+<!--각자 페이지 마다 콘텐츠 들어갈 부분 끝-->
+{%endblock%}
