@@ -20,6 +20,7 @@ from .models import Subject_range
 from .models import Subject_code    
 from .models import Subject    
 from .models import Evaluation
+from .models import Write_index
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
