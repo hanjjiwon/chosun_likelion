@@ -1,15 +1,5 @@
 from django.db import models
 
-
-# # 계정 테이블
-# class Account(models.Model):
-#     id = models.CharField(max_length=20, primary_key=True)
-#     password = models.CharField(max_length=30)
-#     email = models.EmailField(unique=True, null=False)
-
-#     def __str__(self):
-#         return self.id
-
 # 과목 영역 테이블
 class Subject_range(models.Model):
     # 영역(PK)
