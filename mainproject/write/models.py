@@ -1,4 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
+
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCount, HitCountMixin
 
 
 # Create your models here.
@@ -109,3 +117,7 @@ class Write_index(models.Model):
     grade = models.CharField(max_length=20)
     attendance = models.CharField(max_length=20)
     test = models.CharField(max_length=20)
+    hit_count_generic = GenericRelation( HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
+
+    def __str__(self):
+        return self.text

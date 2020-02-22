@@ -1,95 +1,65 @@
-from django.shortcuts import render, redirect
-from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView, CreateView, DeleteView
-from django.views.generic.detail import DetailView
-from .models import Subject_code, Subject, Write_index
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
 from django.views.generic.base import View
 from django.http import HttpResponseForbidden
 from urllib.parse import urlparse
-# Create your views here.
-
-def write(request):
-    return render(request, 'write.html')
 
 
-class CommenttList(ListView):
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+
+from django.contrib.auth.models import User
+
+from django.core.paginator import Paginator
+
+from .models import Account
+from .models import Subject_range
+from .models import Subject_code    
+from .models import Subject    
+from .models import Evaluation
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
+from hitcount.views import HitCountDetailView
+
+
+#class형 뷰의 generic view를 이용하여 구현
+
+#main page = index.html을 보여줄것임
+class BoardList(ListView) : 
     model = Subject_code, Subject
-    template_name_suffix = '_list'
-
-class CommentCreate(CreateView):
-    model = Subject_code, Subject, Write_index
-    fields = ['subject_name', 'professor', 'homework','team','grade','attendance','test',]
-    template_name_suffix = '_create'
-    success_url = '/'
-
-    def form_valid(self, form):
-        form.instance.author_id = self.request.user.id
-        if form.is_valid():
-            form.instance.save()
-            return redirect('/')
-        else:
-            return self.render_to_response({'form': form})
+    template_name = 'board/base.html'
 
 
-class CommentUpdate(UpdateView):
-    model = Subject_code, Subject, Write_index
-    fields = ['subject_name', 'professor', 'homework','team','grade','attendance','test',]
-    template_name_suffix = '_update'
-    success_url = '/'
-
-    def dispatch(self, request, *args, **kwargs):
-        object = self.get_object()
-        if object.author != request.user:
-            messages.warning(request, '수정할 권한이 없습니다.')
-            return HttpResponseRedirect('/')
-        else:
-            return super(PhotoUpdate, self).dispatch(request, *args, **kwargs)
+#강의상세page = detail.html
+class BoardDetail(ListView) :
+    model = Subject_code, Subject
 
 
-class CommentDelete(DeleteView):
-    model = Subject_code, Subject, Write_index
-    template_name_suffix = '_delete'
-    success_url = '/'
-
-    def dispatch(self, request, *args, **kwargs):
-        object = self.get_object()
-        if object.author != request.user:
-            messages.warning(request, '삭제할 권한이 없습니다.')
-            return HttpResponseRedirect('/')
-        else:
-            return super(PhotoDelete, self).dispatch(request, *args, **kwargs)
+#cnt증가
+class PostCountHitDetailView(BoardDetail, HitCountDetailView):
+    count_hit = True
 
 
-class CommentDetail(DetailView):
-    model = Subject_code, Subject, Write_index
-    template_name_suffix = '_detail'
 
 
-class CommentMyList(ListView):
-    model = Subject_code, Subject, Write_index
-    template_name = 'photo/photo_mylist.html'
+#강의평쓰기 _ 존나수정해야함
+@login_required
+def write_add(request ) : #과목 번호
+    if request.method == "POST" :
+         #양식
+         return redirect('/photo/detail/' + str(photo_id))
+    else : 
+        return HttpResponse('잘못된 접근')
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:  # 로그인확인
-            messages.warning(request, '로그인을 먼저하세요')
-            return HttpResponseRedirect('/')
-        return super(PhotoMyList, self).dispatch(request, *args, **kwargs)
 
-
-def index(request):
-    sort = request.GET.get('sort', '')  # url의 쿼리스트링을 가져온다. 없는 경우 공백을 리턴한다
-
-    if sort == 'likes':
-        memos = Memos.objects.annotate(like_count=Count(
-            'likes')).order_by('-like_count', '-update_date')
-        return render(request, 'memo_app/index.html', {'memos': memos})
-    elif sort == 'mypost':
-        user = request.user
-        memos = Memos.objects.filter(name_id=user).order_by(
-            '-update_date')  # 복수를 가져올수 있음
-        return render(request, 'memo_app/index.html', {'memos': memos})
-    else:
-        memos = Memos.objects.order_by('-update_date')
-        return render(request, 'memo_app/index.html', {'memos': memos})
+#강의평 삭제
+def write_delete(request, writer_id ) :
+    write = get_object_or_404(Write, pk = writer_id )
+    if request.user == write.user:
+        if request.method == "POST": 
+            write.delete()
+            return redirect('/write/detail/' +str(write.post.id ))
+    return HttpResponse('잘못된 접근')
