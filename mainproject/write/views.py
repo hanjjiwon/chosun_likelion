@@ -85,7 +85,7 @@ class BoardDetail(ListView) :
 
 
 #강의평 등록
-class BoardCreate(CreateView): 
+class BoardCreate(CreateView) : 
     model = Evaluation, Subject, Write_index
     fields = ['homework_large','homework_medium','homework_small',' homework_best','team_yes','team_no','team_best','grade_good','grade_bad','grade_f',' grade_best','attendance_speak','attendance_elec','attendance_none','attendance_best','test_3','test_2','test_1','test_0','test_best']
     template_name_suffix = '_create'
