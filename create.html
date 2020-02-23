@@ -15,22 +15,17 @@ btn.addEventListener('click', function(){
     //클릭후 할 일
         var array = ['group1', 'group2', 'group3', 'group4', 'group5'];
 
-        if(!$("input[name=array[group*]]:checked").val()) {
-            alert('최소한 하나를 선택해라');
-            return false;
-        }
-        else{
+
             var hw=$("input[name=array[0]]:checked").val();
             var team=$("input[name=array[1]]:checked").val();
             var score=$("input[name=array[2]]:checked").val();
             var attend=$("input[name=array[3]]:checked").val();
             var test=$("input[name=array[4]]:checked").val();
-            var takeclass = $("input[name=array[5]]:checked").val();
 
-            document.location.href="detail.jsp?hw="+hw+"&team="+team+"&score="+score+"&attend="+attend+"&test="+test+"&takeclass="+takeclass;
+            document.location.href="detail.jsp?hw="+hw+"&team="+team+"&score="+score+"&attend="+attend+"&test="+test;
 
         }
-        }  
+        
 
 
         );
@@ -90,18 +85,7 @@ btn.addEventListener('click', function(){
 
 <div class = "line"> </div>
 
-<div class = "year">
-<label for="year">수강학기</label>
-<br>
-<br>
-<select id="year">
-<option value="20192">2019-2학기</option>
-<option value="20191">2019-1학기</option>
-<option value="20182">2018-2학기</option>
 
-</select>
-
-</div>
 
 <div class = "line"> </div>
 

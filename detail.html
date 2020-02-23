@@ -1,5 +1,6 @@
 {% extends 'base.html' %}<!-- base,html을 불러오는 코드 -->
 
+    <!-- 해당 과목의 자세한 수강평가 내용을 볼 수 있는 페이지 -->
 
 
 {% block contents %}
@@ -10,11 +11,10 @@
     var score= getParameter("score"); 
     var attend= getParameter("attend"); 
     var test= getParameter("test"); 
-    var test= getParameter("takeclass"); 
 
     </script>
 
-<!-- lec객체 전체를 가져와서 각 글마다의 제목,날짜,본문을 가져와 사용 -->
+<!-- 각 글마다의 날짜,본문을 가져와 사용 -->
 <div class="content" >
 
     <!-- grid로 감싸는 가장 큰 틀 -->
@@ -25,19 +25,13 @@
         <div class="info-context">마서연</div>
 
     
-        <!-- <p>강의명:아무것도안하고싶다</p> -->
-        <!-- <h1>강의명:아무것도안하고싶다</h1>
-        <p>교수명 : 마서연
-            </p>-->
         </div>
     
-        <!-- 평가들을 합산한 결과 -->
         <div class="item fb-sum">
         <div class="fb-sum-context">강의평</div>
     <!-- 강의평 쓰기로 화면 전환 -->
         <div class="fb-sum-context">
             <a href="{% url 'write' %}"><p style="text-align: right;">새강의평쓰기</p></a></div>
-    <!-- onclick = "location.href = '#'"  -->
         <div class="fb-sum-context">좋아요</div>
         <div class="fb-sum-context">싫어요</div>
         <div class="fb-sum-context">과제</div>
@@ -56,11 +50,10 @@
     {% for lec in posts %}
         
             <!-- <p>강의평 감싸는 박스</p> -->
-                <div class="feedback-context"><script>document.write(takeclass)</script></div><!-- 수강자 정보? -->
-                <!-- <div class="feedback-context"><p style="text-align: right;">추천</p></div> -->
+                <div class="feedback-context">익명</div>
                 <!-- 댓글 쓴 사람만 삭제 가능하게 -->
                 {% for comment in Lec.objects.all()%}
-                    {% if comment.user == request.user  or request.user == "관리자"%}
+                    {% if comment.user == request.user  or request.user == "kcw"%}
                     <div class="feedback-context"><a href="{% url 'feedback_delete' memokey=memo.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')"><p style="text-align: right;">삭제</p></a></div>
                     {%endif%}
                 {%endfor%}
@@ -71,7 +64,6 @@
     
 <div class="container" style=" height: 20px;">
     {%if posts.has_previous%}
-        <!-- <a href="?page=1">First</a> -->
         <a href="?page={{posts.previous_page_number}}">Previous</a>
     {%endif%}
 <!--  -->
@@ -81,15 +73,11 @@
 <!-- 현재 page 번호, 몇 개 게시글로 되었는지 알려줌 e.g.2 of 5 -->
     {%if posts.has_next%}
         <a href="?page={{posts.next_page_number}}">Next</a>
-        <!-- <a href="?page={{posts.paginator.num_pages}}">Last</a> -->
     {%endif%}
 </div>
 
-    <!-- <h1>{{lec.title}}</h1> -->
-    <!-- <p>{{lec.pub_date}}</p> -->
 
-    <!-- 해당 객체의 자세한 본문 내용을 볼 수 있는 페이지로 가기 -->
-    <!-- <a>{{lec.summary}}<a href="{% url 'lec-feedback' lec.id%}">...more</a></p> -->
+
 {%endfor%}
 
 {% endblock %}
