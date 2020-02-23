@@ -7,7 +7,7 @@ from django.http import HttpResponseForbidden
 from urllib.parse import urlparse
 
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
+
 
 from django.contrib.auth.models import User
 
@@ -73,21 +73,23 @@ class BoardDetail(ListView):
         return context
 
 
-class BoardCreate(CreateView) : 
-    model = Subject, Evaluation
-    fields = ['writer_id', 'evaluation_text' , 'homework_large','homework_medium','homework_small',' homework_best','team_yes','team_no','team_best','grade_good','grade_bad','grade_f',' grade_best','attendance_speak','attendance_elec','attendance_none','attendance_best','test_3','test_2','test_1','test_0','test_best',]
-    template_name_suffix = '_create'
-    success_url ='/write/detail/'
+# class BoardCreate(CreateView) : 
+#     model = Subject, Evaluation
+#     fields = ['writer_id', 'evaluation_text' , 'homework_large','homework_medium','homework_small',' homework_best','team_yes','team_no','team_best','grade_good','grade_bad','grade_f',' grade_best','attendance_speak','attendance_elec','attendance_none','attendance_best','test_3','test_2','test_1','test_0','test_best',]
+#     template_name_suffix = '_create'
+#     success_url ='/write/detail/'
 
     
-    #로그인한 사람 글쓰기 가능
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.autor_id = self.request.user.id
-        if form.is_valid() :
-            form.instance.save()
-            return redirect('/write')
-        else : 
-            return self.render_to_response({'form' : form})
+#     로그인한 사람 글쓰기 가능
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         form.instance.autor_id = self.request.user.id
+#         if form.is_valid() :
+#             form.instance.save()
+#             return redirect('/write')
+#         else : 
+#             return self.render_to_response({'form' : form})
         
         
+def create(request):
+    return render(request, 'write/create.html')
