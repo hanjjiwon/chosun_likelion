@@ -39,8 +39,12 @@ class Subject(models.Model):
 
     # 영역 (FK) - 과목 영역 테이블에서 가져옴
     subject_range = models.ForeignKey(Subject_range, on_delete = models.CASCADE)
-    # 과목 코드 (FK) - 과목 정보 테이블에서 가져옴
-    subject_code = models.ForeignKey(Subject_code, on_delete=models.CASCADE)
+    
+    # # 과목 코드 (FK) - 과목 정보 테이블에서 가져옴
+    # subject_code = models.ForeignKey(Subject_code, on_delete=models.CASCADE)
+
+    # 과목명
+    subject_name = models.CharField(max_length=50, null=True)
 
     # 강사명
     professor = models.CharField(max_length=50)
@@ -48,7 +52,7 @@ class Subject(models.Model):
     recommendation = models.IntegerField(default=0)
     # 비추천
     nonrecommendation = models.IntegerField(default=0)
-
+    
     # 과제 - 많음 보통 없음 과제베스트
     homework_large = models.IntegerField(default=0)
     homework_medium = models.IntegerField(default=0)
@@ -80,7 +84,7 @@ class Subject(models.Model):
     test_best = models.CharField(max_length=20, null=True)
 
     def __str__(self):
-        return str(self.id) + ' ' + str(self.subject_range) + ' ' + str(self.subject_code) + ' ' + str(self.professor)
+        return str(self.id) + ' ' + str(self.subject_range) + ' ' + str(self.subject_name) + ' ' + str(self.professor)
 
 # 강의 평가 테이블
 class Evaluation(models.Model):

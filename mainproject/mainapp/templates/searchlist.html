@@ -14,14 +14,16 @@
           </tr>
         </thead>
         <tbody>
-          {% for subjetname in subjectcode.all %}
-            <tr>
-              <td><a href="./search.html" style="color:black">과목이름이 뭔데</a></td>
-              <td>교수이름이 뭔데</td>
-              <td>@mdo</td>
+          {% for subjects in subject.all %}
+            <tr><a href="./index.html" style="color:black">
+              <td>{{subjects.subject_name}}</td>
+              <td>{{subjects.professor}}</td>
+              <td>@mdo</td></a>
             </tr>
           {% endfor %}
         </tbody>
         <br>
+      </table>
+
 <!--각자 페이지 마다 콘텐츠 들어갈 부분 끝-->
 {%endblock%}

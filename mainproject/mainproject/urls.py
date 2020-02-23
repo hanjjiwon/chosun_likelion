@@ -21,5 +21,6 @@ import write.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',mainapp.views.home, name="home"),
-
+    path('searchlist', mainapp.views.searchlist, name='searchlist'),
+    path('index',mainapp.views.index, name='index'),
 ]
