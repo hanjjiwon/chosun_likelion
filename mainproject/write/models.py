@@ -42,7 +42,7 @@ class Subject(models.Model):
     # PK는 id라는 컬럼명으로 저장되어 있습니다.
 
     # 영역 (FK) - 과목 영역 테이블에서 가져옴
-    subject_range = models.ForeignKey(Subject_range, on_delete = models.CASCADE)
+    subject_range = models.ForeignKey(Subject_range, on_delete = models.CASCADE, null=True)
     
     # # 과목 코드 (FK) - 과목 정보 테이블에서 가져옴
     # subject_code = models.ForeignKey(Subject_code, on_delete=models.CASCADE)
