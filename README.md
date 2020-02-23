@@ -1,7 +1,7 @@
 # chosun_likelion
 
 
-!! 미완성!!
+참고사항
 
  - https://github.com/hanjjiwon/photo_board.git
  위 프로젝트의 수준을 개인이 다 겸비하고 있으나 본교에는 이러한 데이터를 얻을곳이 없어 수작업으로 DB를 연동하여 구현하고싶었습니다.
