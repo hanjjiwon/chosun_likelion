@@ -1,0 +1,97 @@
+{% extends 'base.html' %}<!-- base,html을 불러오는 코드 -->
+{% load static %}
+
+
+{% block contents %}
+<!-- lec객체 전체를 가져와서 각 글마다의 제목,날짜,본문을 가져와 사용 -->
+<div class="content" >
+
+    <!-- grid로 감싸는 가장 큰 틀 -->
+    <div class="wrapper">
+        <div class="item info">
+        <div class="info-context">검색한 강의명</div>
+        <div class="info-context">검색한 강의교수</div>
+        <div class="info-context">마서연</div>
+        </div>
+    
+        <!-- 평가들을 합산한 결과 -->
+        <div class="item fb-sum">
+        <div class="fb-sum-context">강의평</div>
+    <!-- 강의평 쓰기로 화면 전환 -->
+        <div class="fb-sum-context">
+            <a href="{% url 'write' %}"><p style="text-align: right;">새강의평쓰기</p></a></div>
+    <!-- onclick = "location.href = '#'"  -->
+        <div class="fb-sum-context">좋아요  
+            {%if object.recommendation.all.count == 0%}
+            <b>0</b>
+            {%elif object.recommendation.all.count%}
+            <b>{{object.recommendation.all.count}}</b>
+            {%endif%}</div>
+        <div class="fb-sum-context">싫어요
+            {%if object.nonrecommendation.all.count == 0%}
+            <b>0</b>
+            {%elif object.nonrecommendation.all.count%}
+            <b>{{object.nonrecommendation.all.count}}</b>
+            {%endif%}
+        </div>
+        <div class="fb-sum-context">과제 <b>{{object.homework}}</b></div>
+        <div class="fb-sum-context">보통</div>
+        <div class="fb-sum-context">조모임</div>
+        <div class="fb-sum-context">없음</div>
+        <div class="fb-sum-context">학점비율</div>
+        <div class="fb-sum-context">비율 채워줌</div>
+        <div class="fb-sum-context">출결</div>
+        <div class="fb-sum-context">직접호명</div>
+        <div class="fb-sum-context">시험횟수</div>
+        <div class="fb-sum-context">2번</div>
+        </div>
+
+    
+    {% for lec in posts %}
+        <!--페이지에 해당하는 객체를 가져와 페이지네이션 적용(3개씩) -->
+        <div class="item feedback">
+            <!-- <p>강의평 감싸는 박스</p> -->
+                <div class="feedback-context">{{lec.title}}</div>
+                <!-- <div class="feedback-context"><p style="text-align: right;">추천</p></div> -->
+                <!-- 댓글 쓴 사람만 삭제 가능하게 -->
+                {% for comment in Lec.objects.all()%}
+                    {% if comment.user == request.user  or request.user == "관리자"%}
+                    <div class="feedback-context"><a href="{% url 'feedback_delete' memokey=memo.pk %}" onclick="return confirm('정말 삭제하시겠습니까?')"><p style="text-align: right;">삭제</p></a></div>
+                    {%endif%}
+                {%endfor%}
+                <div class="feedback-context">{{lec.pub_date}}</div>
+                <div class="feedback-context texts">{{lec.body|safe|linebreaks}}</div>
+                </div>
+    
+<div class="container" style=" height: 20px;">
+    {%if posts.has_previous%}
+        <!-- <a href="?page=1">First</a> -->
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {%endif%}
+<!--  -->
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+<!-- 현재 page 번호, 몇 개 게시글로 되었는지 알려줌 e.g.2 of 5 -->
+    {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">Next</a>
+        <!-- <a href="?page={{posts.paginator.num_pages}}">Last</a> -->
+    {%endif%}
+</div>
+
+    <!-- <h1>{{lec.title}}</h1> -->
+    <!-- <p>{{lec.pub_date}}</p> -->
+
+    <!-- 해당 객체의 자세한 본문 내용을 볼 수 있는 페이지로 가기 -->
+    <!-- <a>{{lec.summary}}<a href="{% url 'lec-feedback' lec.id%}">...more</a></p> -->
+{%endfor%}
+
+{% endblock %}
+
+
+
+<!-- 쿼리셋 메소드들
+.all() lec클래스에서 만든 모든 객체(쿼리셋)를 가져오는 메소드 -->
+<!-- .count() 객체 개수 반환 
+.first() 첫번째 객체 반환
+.last() 마지막 객체 반환 -->
