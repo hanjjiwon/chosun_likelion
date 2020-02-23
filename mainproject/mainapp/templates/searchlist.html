@@ -3,7 +3,7 @@
 {%block first%}  
     <!--각자 페이지 마다 콘텐츠 들어갈 부분-->
   <div class="content">
-    <h2>검색한 과목 이름나오게</h2>
+    <h2>{{searchtext}}</h2>
     <br>
     <table class="table table-hover">
         <thead>
@@ -14,13 +14,27 @@
           </tr>
         </thead>
         <tbody>
-          {% for subjects in subject.all %}
-            <tr><a href="./index.html" style="color:black">
-              <td>{{subjects.subject_name}}</td>
-              <td>{{subjects.professor}}</td>
-              <td>@mdo</td></a>
-            </tr>
-          {% endfor %}
+          <!-- {%if not subject == ''%} -->
+            {% for subjects in subject.all %}
+              <tr>
+                <td>{{subjects.subject_name}}</td>
+                <td><a href="{%url 'index'%}" style="color:black">{{subjects.professor}}</a></td>
+                <td>@mdo</td>
+              </tr>
+            {% endfor %}
+          <!-- {% endif %}
+
+          {%if not subjectrange == ''%}
+            {% for subjects in subjectrange.all %}
+              <tr>
+                <td>{{subjects.subject_name}}</td>
+                <td><a href="{%url 'index'%}" style="color:black">{{subjects.professor}}</a></td>
+                <td>@mdo</td>
+              </tr>
+            {% endfor %}
+          {% endif %} -->
+
+
         </tbody>
         <br>
       </table>
