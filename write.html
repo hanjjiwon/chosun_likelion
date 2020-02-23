@@ -39,6 +39,7 @@
       <h3>팀플</h3>
       <input type="radio" name="group2" value="1" /> 있음 
       <input type="radio" name="group2" value="2" /> 없음
+      <input type="text">선택
       
       <h3>학점비율</h3>
       <input type="radio" name="group3" value="1" /> 잘줌 
@@ -92,39 +93,43 @@
 
     <div class = "upload">
         <form>
-            <input onclick="" type = "button" value = "제출하기" />
+            <input onclick="{% url 'new' %}" id='submit' type = "button" value = "제출하기" />
         </form>
     </div>
   </div> 
 <!-- 선택한 라디오 버튼의 값을 담아오는 코드 -->
-<script>
-function getset(){
-var array = ['group1', 'group2', 'group3', 'group4', 'group5'];
-for(var i in array){
-  function get(i){
-    if(!$("input[name=array[i]]:checked").val()) {
-      alert('최소한 하나를 선택해라');
-      return false;
-    }
-    else{
-      var ipc=$("input[name=array[i]]:checked").val();
-      document.getElementsByName(i).innerHtml = ipc
-    }
-  }
-}
-}
-function get(){
-  if(!$("input[name='name']:checked").val()) {
-      alert('최소한 하나를 선택하십시오.');
-      return false;
-  }else {
-      var ipc=$("input[name='group1']:checked").val();
-      $("#ipc",opener.document).val(ipc);
-      document.getElementsByName('group1').innerHtml = ipc
-      // querySelector('input[name="group1"]:checked').val();
-      ip.innerHtml
-      // window.close();
-  }
-}
+
+<!-- 외부 JS코드를 불러와서 하겠음. -->
+<script src = 'js/scripts.js'>
+// function getset(){
+// var array = ['group1', 'group2', 'group3', 'group4', 'group5'];
+// for(var i in array){
+//   function get(i){
+//     if(!$("input[name=array[i]]:checked").val()) {
+//       alert('최소한 하나를 선택해라');
+//       return false;
+//     }
+//     else{
+//       var ipc=$("input[name=array[i]]:checked").val();
+//       // 이때 i가 1,2,3,4,5인지 확인하고 그 값을 가져와서 특정변수에 저장
+//       document.getElementsByName(array[i]).innerHtml = ipc
+
+//     }
+//   }
+// }
+// }
+// function get(){
+//   if(!$("input[name='name']:checked").val()) {
+//       alert('최소한 하나를 선택하십시오.');
+//       return false;
+//   }else {
+//       var ipc=$("input[name='group1']:checked").val();
+//       // $("#ipc",opener.document).val(ipc);
+//       document.getElementsByName('group1').innerHtml = ipc
+//       // querySelector('input[name="group1"]:checked').val();
+//       // ip.innerHtml
+//       // window.close();
+//   }
+// }
   </script>
   <!--각자 페이지 마다 콘텐츠 들어갈 부분 끝-->
