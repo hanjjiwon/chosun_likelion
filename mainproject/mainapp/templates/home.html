@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,21 +7,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>base</title>
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-<link rel="stylesheet" href="{% static 'css/login.css' %}">
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<link rel="stylesheet" href="../../static/css/home.css">
+<link rel="stylesheet" href="../../static/css/base.css">
 </head>
 <body>
 <div class="frame" style="height: 850px;">       
   <div class="header">
-    <h2>찐</h2>
-    <pre><a href="">login</a>   <a href="">signup</a>   <a href="">index</a>   <a href="">detail</a>   <a href="./write.html">write</a></pre>
+    <h2>대학강의평가 멋사</h2>
+  </div>        
+<div class="nav">
+      <!-- 로그인o -->
+      {% if user.is_authenticated %}
+      <pre><a href="">{{user.username}}</a>   <a href="javascript:{document.getElementById('logout').submit()}">Logout</a></pre>
+      <form id="logout" method="POST" action="{% url 'account:logout' %}">
+          {% csrf_token %} <input type="hidden" />
+      </form>
+      <!-- 로그인x-->
+      {% else %}
+      <pre><a href="{% url 'account:login' %}">로그인</a>    <a href="{% url 'account:signup' %}">회원가입</a></pre>
+      {%endif%}
+    </div>
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+    <div class="myaccount">
+      <img src="../../static/img/likelion.png" width="300px" class ="center">
+      <h2>chosun</h2>
+      <br>
+      <a href="{% url 'write:list' %}">write</a>
+    </div>
   </div> 
 
-    {% block content %}
-  <div class="content"></div> 
-
-    {% endblock %}
 <div class="container">
 
   <div class="logo"><img src="../../static/img/logo.jpg" width="120px"> </div>

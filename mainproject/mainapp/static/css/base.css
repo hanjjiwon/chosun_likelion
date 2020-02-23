@@ -34,11 +34,8 @@
   .container {
     overflow: hidden; 
     display: table;
-    
-    position:absolute;
-    bottom:0;
+    margin: auto;
   }
-  
   .footer {
     display: table-cell;
     font-size: 15px;
@@ -47,3 +44,15 @@
   .logo{
     display: table-cell;
   } 
+
+  .signup{
+    text-align: left;
+    padding:100px 100px;
+    margin: 100px;
+  }
+
+  .login{
+    text-align: left;
+    padding:80px 100px;
+    margin: 100px;
+  }
