@@ -33,7 +33,6 @@ from hitcount.views import HitCountDetailView
 class BoardList(ListView) : 
     model = Subject_code, Subject
     template_name = 'board/index.html'
-    success_url = ('/write/detail/' + str(id))
     paginate_by = 3
 
     def get_context_data(self, **kwargs):

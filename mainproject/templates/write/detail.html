@@ -1,5 +1,5 @@
 {% extends 'base.html' %}<!-- base,html을 불러오는 코드 -->
-
+{% load static %}
 
 
 {% block contents %}
@@ -12,12 +12,6 @@
         <div class="info-context">검색한 강의명</div>
         <div class="info-context">검색한 강의교수</div>
         <div class="info-context">마서연</div>
-
-    
-        <!-- <p>강의명:아무것도안하고싶다</p> -->
-        <!-- <h1>강의명:아무것도안하고싶다</h1>
-        <p>교수명 : 마서연
-            </p>-->
         </div>
     
         <!-- 평가들을 합산한 결과 -->
@@ -27,9 +21,20 @@
         <div class="fb-sum-context">
             <a href="{% url 'write' %}"><p style="text-align: right;">새강의평쓰기</p></a></div>
     <!-- onclick = "location.href = '#'"  -->
-        <div class="fb-sum-context">좋아요</div>
-        <div class="fb-sum-context">싫어요</div>
-        <div class="fb-sum-context">과제</div>
+        <div class="fb-sum-context">좋아요  
+            {%if object.recommendation.all.count == 0%}
+            <b>0</b>
+            {%elif object.recommendation.all.count%}
+            <b>{{object.recommendation.all.count}}</b>
+            {%endif%}</div>
+        <div class="fb-sum-context">싫어요
+            {%if object.nonrecommendation.all.count == 0%}
+            <b>0</b>
+            {%elif object.nonrecommendation.all.count%}
+            <b>{{object.nonrecommendation.all.count}}</b>
+            {%endif%}
+        </div>
+        <div class="fb-sum-context">과제 <b>{{object.homework}}</b></div>
         <div class="fb-sum-context">보통</div>
         <div class="fb-sum-context">조모임</div>
         <div class="fb-sum-context">없음</div>
