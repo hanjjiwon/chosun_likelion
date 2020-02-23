@@ -7,10 +7,28 @@ btn.addEventListener('click', function(){
     
     //어제 구현한 부분 넣기
 
-    // name==group1인 거에서 가져온 값을 변수( home )에 저장
+
+    // function getset(){
+        var array = ['group1', 'group2', 'group3', 'group4', 'group5'];
+        for(var i in array){
+        function get(i){
+        if(!$("input[name=array[i]]:checked").val()) {
+            alert('최소한 하나를 선택해라');
+            return false;
+        }
+        else{
+            var home=$("input[name=array[i]]:checked").val();
+                // id=group1(array[0])인 태그 안에 가져온 값을 변수( home )에 저장
+            // document.getElementsByName(array[i]).innerHtml = ipc
+                // id=group1으로 새로 만들어준 코드 부분에 innerHTML로 값 넣기
+            document.getElementById(array[i]).innerHTML = home;
+        }
+        }
+        }
+        // }
 
     // id=group1으로 새로 만들어준 코드 부분에 innerHTML로 값 넣기
-    document.getElementById('group1').innerHTML = home;
+    // document.getElementById('group1').innerHTML = home;
 
 });
 
