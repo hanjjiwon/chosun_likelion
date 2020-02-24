@@ -19,12 +19,14 @@
  가상환경\lib\site-packages\hitcount\models.py 가서 'python_2_unicode_compatible' 관련 내용 
 
 팀 구성과 & 주 분야
+
 김창우
  - DB
 
 마서연
  - javascript
-
+ - https://github.com/seoyeon1/solmaru-foodcourt-system 
+ 
 윤지유
  - HTML & CSS
  - Python
